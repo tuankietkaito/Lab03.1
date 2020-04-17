@@ -1,5 +1,6 @@
 #include <sys/types.h>
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 
 int main()
@@ -13,7 +14,8 @@ int main()
 
     while (fgets(buff, sizeof(buff), fp) != NULL)
     {
-        a[n++] = atoi(buff);
+        int assigned = sscanf(buff, "%d", &a[n]);
+        n++;
     }
 
     pid_t pid;
