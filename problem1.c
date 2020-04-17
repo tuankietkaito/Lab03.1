@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     fp = fopen("number.txt", "rb");
 
     char buff[100];
-    int arr[100];
+    int a[100];
     int n = 0;
 
     // while(fscanf(fp, "%[^\n]\n", buff) != EOF)
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     {
         int count = 0;
         for (int i = 0; i < n; i++)
-            if (arr[i] % 3 == 0)
+            if (a[i] % 3 == 0)
                 count++;
 
         printf("%d\n", count);
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     {
         int count = 0;
         for (int i = 0; i < n; i++)
-            if (arr[i] % 2 == 0)
+            if (a[i] % 2 == 0)
                 count++;
         printf("%d\n", count);
         fflush(stdout);
