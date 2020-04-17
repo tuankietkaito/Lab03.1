@@ -1,9 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include <sys/types.h>
+#include <stdio.h>
+#include <unistd.h>
 
-int main(int argc, char *argv[])
+int main()
 {
     FILE *fp;
     fp = fopen("number.txt", "rb");
@@ -12,41 +11,34 @@ int main(int argc, char *argv[])
     int a[100];
     int n = 0;
 
-    // while(fscanf(fp, "%[^\n]\n", buff) != EOF)
-    // {
-    //     arr[size++] = atoi(buff);
-    // }
-
     while (fgets(buff, sizeof(buff), fp) != NULL)
     {
-        a[n++]=atoi(buff);
+        a[n++] = atoi(buff);
     }
-
-    fclose(fp);
 
     pid_t pid;
     pid = fork();
+    int res;
 
     if (pid == 0)
     {
-        int count = 0;
+        res = 0;
         for (int i = 0; i < n; i++)
             if (a[i] % 3 == 0)
-                count++;
-
-        printf("%d\n", count);
+                res++;
+        printf("%d\n", res);
         fflush(stdout);
-        return 0;
     }
-    else
+    else if (pid > 0)
     {
-        int count = 0;
+        res = 0;
         for (int i = 0; i < n; i++)
             if (a[i] % 2 == 0)
-                count++;
-        printf("%d\n", count);
+                res++;
+        printf("%d\n", res);
         fflush(stdout);
-        return 0;
     }
+
+    fclose(fp);
     return 0;
 }
