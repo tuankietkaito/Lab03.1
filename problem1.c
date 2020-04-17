@@ -1,47 +1,51 @@
 #include <stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 
-struct Node {
-
-};
-
-int main(int argc, char* argv[]) {
-
-    FILE* fp;
-
-    char line[100];
-    int arr[100];
-    int size=0;
+int main(int argc, char *argv[])
+{
+    FILE *fp;
     fp = fopen("number.txt", "rb");
-    while(fscanf(fp, "%[^\n]\n", line) != EOF)
+
+    char buff[100];
+    int arr[100];
+    int n = 0;
+
+    // while(fscanf(fp, "%[^\n]\n", buff) != EOF)
+    // {
+    //     arr[size++] = atoi(buff);
+    // }
+
+    while (fgets(buff, sizeof(buff), fp) != NULL)
     {
-        arr[size++] = atoi(line);
+        a[n++]=atoi(buff);
     }
-    fclose(fp); 
+
+    fclose(fp);
 
     pid_t pid;
     pid = fork();
 
-    if (pid == 0) {
+    if (pid == 0)
+    {
         int count = 0;
-        for(int i=0 ;i<size; i++)
-            if(arr[i] % 3 == 0)
+        for (int i = 0; i < n; i++)
+            if (arr[i] % 3 == 0)
                 count++;
 
-        printf("%d\n",count);
-        fflush (stdout) ;
+        printf("%d\n", count);
+        fflush(stdout);
         return 0;
-
     }
-    else{
+    else
+    {
         int count = 0;
-        for(int i=0 ;i<size; i++)
-            if(arr[i] % 2 == 0)
+        for (int i = 0; i < n; i++)
+            if (arr[i] % 2 == 0)
                 count++;
         printf("%d\n", count);
-        fflush (stdout) ;
+        fflush(stdout);
         return 0;
     }
     return 0;
