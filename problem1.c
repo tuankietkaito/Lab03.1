@@ -21,20 +21,20 @@ int main()
     pid = fork();
     int res;
 
-    if (pid == 0)
-    {
-        res = 0;
-        for (int i = 0; i < n; i++)
-            if (a[i] % 3 == 0)
-                res++;
-        printf("%d\n", res);
-        fflush(stdout);
-    }
-    else if (pid > 0)
+    if (pid > 0)
     {
         res = 0;
         for (int i = 0; i < n; i++)
             if (a[i] % 2 == 0)
+                res++;
+        printf("%d\n", res);
+        fflush(stdout);
+    }
+    else if (pid == 0)
+    {
+        res = 0;
+        for (int i = 0; i < n; i++)
+            if (a[i] % 3 == 0)
                 res++;
         printf("%d\n", res);
         fflush(stdout);
